@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EAE8E8"
+        tools:context=".StaffDetailsActivity">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvimage">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp">
+
+
+                <TextView
+                    android:id="@+id/tvFullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="Name:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvResFullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tvResEmpId"
+                    app:layout_constraintTop_toTopOf="@id/tvFullName"
+                    tools:text="name here" />
+
+                <TextView
+                    android:id="@+id/tvEmpId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Emp Id:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lora_medium"
+                    app:layout_constraintStart_toStartOf="@id/tvFullName"
+                    app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+
+                <TextView
+                    android:id="@+id/tvResEmpId"
+                    tools:text="emId here"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lora_medium"
+                    app:layout_constraintTop_toTopOf="@id/tvEmpId"
+                    app:layout_constraintStart_toStartOf="@id/tvResAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tvAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="Age:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvFullName"
+                    app:layout_constraintTop_toBottomOf="@id/tvEmpId" />
+
+                <TextView
+                    android:id="@+id/tvResAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tvResDob"
+                    app:layout_constraintTop_toTopOf="@id/tvAge"
+                    tools:text="result here" />
+
+                <TextView
+                    android:id="@+id/tvDob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="D O B:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvFullName"
+                    app:layout_constraintTop_toBottomOf="@id/tvAge" />
+
+                <TextView
+                    android:id="@+id/tvResDob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tvResDoj"
+                    app:layout_constraintTop_toTopOf="@id/tvDob"
+                    tools:text="dob here" />
+
+                <TextView
+                    android:id="@+id/tvDoj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="D O J:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvDob"
+                    app:layout_constraintTop_toBottomOf="@id/tvDob" />
+
+                <TextView
+                    android:id="@+id/tvResDoj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tvResPlace"
+                    app:layout_constraintTop_toTopOf="@id/tvDoj"
+                    tools:text="doj here" />
+
+                <TextView
+                    android:id="@+id/tvPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="Place:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvDoj"
+                    app:layout_constraintTop_toBottomOf="@id/tvDoj" />
+
+                <TextView
+                    android:id="@+id/tvResPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tvResExperience"
+                    app:layout_constraintTop_toTopOf="@id/tvPlace"
+                    tools:text="place here" />
+
+                <TextView
+                    android:id="@+id/tvExperience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:text="Experience:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvPlace"
+                    app:layout_constraintTop_toBottomOf="@id/tvPlace" />
+
+                <TextView
+                    android:id="@+id/tvResExperience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/lora_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/tvExperience"
+                    app:layout_constraintTop_toTopOf="@id/tvExperience"
+                    tools:text="experience here" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvimage"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            app:cardCornerRadius="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBack">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_person_24"
+                android:padding="10dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tvMainStaffName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:fontFamily="@font/lora_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/cvimage"
+            app:layout_constraintStart_toEndOf="@id/cvimage"
+            app:layout_constraintTop_toTopOf="@id/cvimage"
+            tools:text="Main Staff Name" />
+
+
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:src="@drawable/back_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="18dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="3dp"/>
+
+        <ImageView
+            android:id="@+id/imgEdit"
+            android:src="@drawable/edit_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="18dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

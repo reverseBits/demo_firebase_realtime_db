@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/lltool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:layout_marginTop="-15.60dp"
+            android:layout_marginBottom="8.40dp"
+            android:padding="6dp"
+            app:cardCornerRadius="14.40dp"
+            app:cardElevation="2.40dp"
+            app:contentPaddingTop="15.60dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="15.60dp">
+
+                    <ImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="31.20dp"
+                        android:layout_height="31.20dp"
+                        android:layout_marginRight="9.60dp"
+                        android:adjustViewBounds="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="3.60dp"
+                        android:src="@drawable/back_icon" />
+
+                    <TextView
+                        android:id="@+id/tvToolbarTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Staff"
+                        android:textFontWeight="500"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="@dimen/_20ssp" />
+
+                    <ImageView
+                        android:id="@+id/ivprofile"
+                        android:layout_width="31.20dp"
+                        android:layout_height="31.20dp"
+                        android:layout_marginRight="9.60dp"
+                        android:adjustViewBounds="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="3.60dp"
+                        android:src="@drawable/ic_baseline_person_24" />
+
+
+                </LinearLayout>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/tvUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:indeterminate="true"
+                    android:visibility="invisible" />
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</layout>
