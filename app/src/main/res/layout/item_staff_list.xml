@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/ivEmp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="4dp"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:layout_toRightOf="@id/image"
+                android:layout_toRightOf="@id/ivEmp"
                 android:fontFamily="@font/lora_medium"
                 android:textColor="@color/black"
                 android:textSize="14sp"

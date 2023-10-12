@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/staffListFragment"
@@ -94,4 +97,8 @@
             app:destination="@id/homeFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mysicu.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

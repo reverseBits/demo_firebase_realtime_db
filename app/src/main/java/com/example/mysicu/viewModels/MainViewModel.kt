@@ -1,4 +1,4 @@
-package com.example.mysicu
+package com.example.mysicu.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

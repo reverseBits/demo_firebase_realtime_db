@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import com.example.mysicu.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 

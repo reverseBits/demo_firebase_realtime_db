@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.mysicu.MainViewModel
+import com.example.mysicu.viewModels.MainViewModel
 import com.example.mysicu.R
 import com.example.mysicu.databinding.FragmentUpdateStaffBinding
 import com.example.mysicu.models.StaffModel
@@ -53,7 +53,6 @@ class UpdateStaffFragment : Fragment() {
         //    get data from staffDetails Fragment
         val name = args.staffModel?.name
         val empId = args.staffModel?.empId
-        val age = args.staffModel?.age
         val dob = args.staffModel?.dob
         val doj = args.staffModel?.doj
         val place = args.staffModel?.place
@@ -62,7 +61,6 @@ class UpdateStaffFragment : Fragment() {
         //    set data in editText of updateStaff fragment
         mBinding.edtName.setText(name)
         mBinding.edtEmpId.setText(empId)
-        mBinding.edtAge.setText(age)
         mBinding.edtDob.setText(dob)
         mBinding.edtDoj.setText(doj)
         mBinding.edtPlace.setText(place)

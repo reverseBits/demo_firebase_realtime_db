@@ -1,6 +1,7 @@
 package com.example.mysicu.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.mysicu.MainViewModel
+import com.bumptech.glide.Glide
+import com.example.mysicu.viewModels.MainViewModel
 import com.example.mysicu.R
 import com.example.mysicu.databinding.FragmentStaffDetailsBinding
 import com.example.mysicu.models.StaffModel
@@ -70,10 +72,17 @@ class StaffDetailsFragment : Fragment() {
         // set data in TextView of staffDetails fragment
         mBinding.tvResFullName.text = staffModel?.name
         mBinding.tvResEmpId.text = staffModel?.empId
-        mBinding.tvResAge.text = staffModel?.age
         mBinding.tvResDob.text = staffModel?.dob
         mBinding.tvResDoj.text = staffModel?.doj
         mBinding.tvResPlace.text = staffModel?.place
         mBinding.tvResExperience.text = staffModel?.experience
+
+        Log.d("TAG", "setStaffDetailModel: ${staffModel?.image}")
+
+        Glide.with(this)
+            .load(staffModel?.image)
+            .circleCrop()
+            .placeholder(R.drawable.ic_baseline_person_24)
+            .into(mBinding.imgProfile)
     }
 }
