@@ -1,6 +1,7 @@
 package com.example.mysicu.auth
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Calendar
 
 class SignUpFragment : Fragment() {
 
@@ -46,36 +48,35 @@ class SignUpFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
 
+        mBinding.edtDob.setOnClickListener {
+
+            val c = Calendar.getInstance()
+
+
+            val year = c[Calendar.YEAR]
+            val month = c[Calendar.MONTH]
+            val day = c[Calendar.DAY_OF_MONTH]
+
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                { view, year, monthOfYear, dayOfMonth ->
+                    mBinding.edtDob.setText(dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
+                },
+                year, month, day
+            )
+
+            datePickerDialog.show()
+
+
+        }
+
         mBinding.tvLogin.setOnClickListener {
 
         }
 
         mBinding.btnSignUp.setOnClickListener {
             validation()
-//            val email = mBinding.edtEmail.text.toString()
-//            val password = mBinding.edtPassword.text.toString()
-//            val confirmPassword = mBinding.edtConfirmPassword.text.toString()
-//
-//            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-//
-//                if (password == confirmPassword) {
-//
-//                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-//
-//                        if (it.isSuccessful) {
-//                            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-//                        } else {
-//                            Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT)
-//                                .show()
-//                        }
-//                    }
-//                } else {
-//                    Toast.makeText(context, "Password not match", Toast.LENGTH_SHORT).show()
-//                }
-//            } else {
-//                Toast.makeText(context, "Empty fields are not allowed !!", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
         }
 
     }
@@ -85,12 +86,16 @@ class SignUpFragment : Fragment() {
         val name = mBinding.edtName.text.toString()
         val email = mBinding.edtEmail.text.toString()
         val phoneNo = mBinding.edtPhoneNo.text.toString()
+        val dob = mBinding.edtDob.text.toString()
+        val qualification = mBinding.edtQualification.text.toString()
+        val exp = mBinding.edtExperience.text.toString()
+        val place = mBinding.edtPlace.text.toString()
 
         val user = FirebaseAuth.getInstance().currentUser
 
         var userId = user?.uid
 
-        val admin = AdminData(name, email, phoneNo)
+        val admin = AdminData(name, email, phoneNo, dob, qualification, exp, place,null)
 
         database.child(userId.toString()).setValue(admin).addOnSuccessListener {
             Toast.makeText(requireContext(), "Data Successfully Add", Toast.LENGTH_SHORT).show()

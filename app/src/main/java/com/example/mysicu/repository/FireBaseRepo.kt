@@ -29,6 +29,8 @@ class FireBaseRepo {
         mDatabase.child("Home Menu").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 serviceList.clear()
+
+
                 for (postSnapshot in snapshot.children) {
                     try {
                         val code: HomeMenuData = postSnapshot.getValue(HomeMenuData::class.java)!!

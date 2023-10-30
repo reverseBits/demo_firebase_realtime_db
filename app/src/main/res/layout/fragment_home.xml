@@ -21,27 +21,15 @@
             android:scaleType="centerCrop"
             android:src="@drawable/sicu_main_image" />
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_home_menu"
-            tools:itemCount="8"
-            app:spanCount="3"
-            android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
-
-        <Button
-            android:id="@+id/btnLogOut"
-            android:text="Log Out"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_home_menu" />
     </LinearLayout>
 </layout>

@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:background="#A5E8AC"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
@@ -37,8 +37,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="18dp"
-                    android:src="@drawable/icon_nurse" />
+                    android:layout_marginTop="18dp"/>
 
                 <TextView
                     android:id="@+id/tvMenuName"
@@ -50,6 +49,7 @@
                     android:text="Nursing Staff"
                     android:textColor="#8C1B5F"
                     android:textSize="16sp"
+                    android:gravity="center_horizontal"
                     android:paddingHorizontal="9dp"/>
 
             </LinearLayout>

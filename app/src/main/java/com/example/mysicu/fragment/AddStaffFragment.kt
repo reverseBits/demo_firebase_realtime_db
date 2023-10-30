@@ -42,7 +42,7 @@ class AddStaffFragment : Fragment() {
     var image: String? = null
 
     // creating a storage reference
-    private var storageRef = Firebase.storage.reference;
+    private var storageRef = Firebase.storage.reference
 
 
     override fun onCreateView(
@@ -139,7 +139,7 @@ class AddStaffFragment : Fragment() {
             mBinding.edtName.error = "Please enter name"
         } else if (empId.isEmpty()) {
             mBinding.edtEmpId.error = "Please enter empId"
-        }  else if (dob.isEmpty()) {
+        } else if (dob.isEmpty()) {
             mBinding.edtDob.error = "Please enter dob"
         } else if (doj.isEmpty()) {
             mBinding.edtDoj.error = "Please enter doj"

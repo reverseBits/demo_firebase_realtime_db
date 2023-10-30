@@ -54,16 +54,17 @@ class LoginFragment : Fragment() {
                 mBinding.edtPassword.error = "plz Enter Max 6 Chr"
             } else {
                 auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
-                    if (auth.currentUser!!.isEmailVerified == true) {
+//                    if (auth.currentUser!!.isEmailVerified == true) {
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                         Toast.makeText(requireContext(), "successful", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "email is not verified",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+//                    }
+//                    else {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "email is not verified",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
 
                 }.addOnFailureListener {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()

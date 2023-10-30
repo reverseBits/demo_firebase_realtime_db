@@ -56,11 +56,7 @@ class HomeFragment : Fragment() {
 
 
 
-        mBinding.btnLogOut.setOnClickListener {
 
-            auth.signOut()
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-        }
 
     }
 

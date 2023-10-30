@@ -1,6 +1,8 @@
 package com.example.mysicu.adapter
 
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -70,13 +72,17 @@ class HomeAdapter(val list: ArrayList<HomeMenuData>,val fragment: Fragment) :
 
         }
 
-        Glide.with(holder.mBinding.root)
-            .load(doneList.img)
-            .placeholder(R.drawable.loader)
-            .thumbnail(0.5f)
-            .into(holder.mBinding.imgMenu)
+        if (!doneList.img.isNullOrEmpty()){
+            Glide.with(holder.mBinding.root)
+                .load(doneList.img)
+                .error(R.drawable.loader)
+                .thumbnail(0.5f)
+                .into(holder.mBinding.imgMenu)
+        }else{
 
-
+            holder.mBinding.imgMenu.visibility = View.GONE
+            holder.mBinding.tvMenuName.gravity = Gravity.CENTER_VERTICAL
+        }
     }
 }
 
