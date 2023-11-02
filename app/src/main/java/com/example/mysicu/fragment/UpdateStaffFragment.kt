@@ -49,6 +49,7 @@ class UpdateStaffFragment : Fragment() {
         dbRef = FirebaseDatabase.getInstance().getReference("Stafflist")
 
         mBinding.titleBar.tvToolbarTitle.setText("Nursing Staff")
+        mBinding.titleBar.ivprofile.visibility = View.GONE
 
         //    get data from staffDetails Fragment
         val name = args.staffModel?.name

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.toColorFilter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -45,7 +46,10 @@ class StaffDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mBinding.titalBar.ivprofile.setImageResource(R.drawable.edit_24)
+
         mainViewModel = ViewModelProvider(requireActivity()).get()
+
 
         mainViewModel.staffDetailsMutableLiveData.observe(viewLifecycleOwner) {
             it?.let {
@@ -55,34 +59,38 @@ class StaffDetailsFragment : Fragment() {
 
         setStaffDetailModel(args.staffModel)
 
-        mBinding.imgEdit.setOnClickListener {
+
+
+        mBinding.titalBar.ivprofile.setOnClickListener {
 
             val action =
                 StaffDetailsFragmentDirections.actionStaffDetailsFragmentToUpdateStaffFragment(args.staffModel)
             findNavController().navigate(action)
         }
 
-        mBinding.ivBack.setOnClickListener {
+        mBinding.titalBar.ivBack.setOnClickListener {
             navController.navigateUp()
         }
+
 
     }
 
     private fun setStaffDetailModel(staffModel: StaffModel?) {
         // set data in TextView of staffDetails fragment
-        mBinding.tvResFullName.text = staffModel?.name
-        mBinding.tvResEmpId.text = staffModel?.empId
-        mBinding.tvResDob.text = staffModel?.dob
-        mBinding.tvResDoj.text = staffModel?.doj
-        mBinding.tvResPlace.text = staffModel?.place
-        mBinding.tvResExperience.text = staffModel?.experience
-
-        Log.d("TAG", "setStaffDetailModel: ${staffModel?.image}")
+        mBinding.tvName.text = staffModel?.name
+        mBinding.tvType.text = "Nurse"
+//        mBinding.tvResEmpId.text = staffModel?.empId
+//        mBinding.tvResDob.text = staffModel?.dob
+//        mBinding.tvResDoj.text = staffModel?.doj
+//        mBinding.tvResPlace.text = staffModel?.place
+        mBinding.tvExp.text = staffModel?.experience + "yrs+"
 
         Glide.with(this)
             .load(staffModel?.image)
+            .placeholder(R.drawable.icon_doctor)
             .circleCrop()
-            .placeholder(R.drawable.ic_baseline_person_24)
-            .into(mBinding.imgProfile)
+            .into(mBinding.ivEmp)
+        Log.d("TAG", "setStaffDetailModel: ${staffModel?.image}")
+
     }
 }

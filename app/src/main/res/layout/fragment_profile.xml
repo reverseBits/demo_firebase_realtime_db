@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EAE8E8"
+        android:background="#D7D2F7"
         android:orientation="vertical"
         tools:context=".fragment.ProfileFragment">
 
@@ -18,256 +18,263 @@
             android:id="@+id/titalBar"
             layout="@layout/toolbar" />
 
-        <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/white">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgUserImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/user_profile_icon" />
-
-            <ImageView
-                android:id="@+id/ivprofile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/ic_image_upload"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                android:padding="4dp"
-                android:src="@drawable/ic_camera"
-                app:tint="@color/black" />
-        </FrameLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="10dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cvimage">
+            app:layout_constraintTop_toBottomOf="@id/imgUserImage">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="14dp"
-                android:paddingHorizontal="12dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="Name:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                <FrameLayout
+                    android:id="@+id/frupload"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResName" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/edtResName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResEmailId"
-                    app:layout_constraintStart_toStartOf="@id/edtResEmailId"
-                    tools:text="Name" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/user_profile_icon" />
 
-                <TextView
-                    android:id="@+id/tvEmailId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="Email:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResEmailId" />
+                    <ImageView
+                        android:id="@+id/ivUpload"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginBottom="5dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/toolbar_round_backround"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_camera" />
+                </FrameLayout>
 
-                <EditText
-                    android:id="@+id/edtResEmailId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResPhoneNo"
-                    app:layout_constraintStart_toStartOf="@id/edtResPhoneNo"
-                    tools:text="EmailId" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="14dp"
+                    android:paddingHorizontal="12dp">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="Name:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResName" />
+
+                    <EditText
+                        android:id="@+id/edtResName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResEmailId"
+                        app:layout_constraintStart_toStartOf="@id/edtResEmailId"
+                        tools:hint="Name" />
+
+                    <TextView
+                        android:id="@+id/tvEmailId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="Email:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResEmailId" />
+
+                    <EditText
+                        android:id="@+id/edtResEmailId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResPhoneNo"
+                        app:layout_constraintStart_toStartOf="@id/edtResPhoneNo"
+                        tools:hint="EmailId" />
 
 
-                <TextView
-                    android:id="@+id/tvPhoneNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="PhoneNo:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResPhoneNo" />
+                    <TextView
+                        android:id="@+id/tvPhoneNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="PhoneNo:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResPhoneNo" />
 
-                <EditText
-                    android:id="@+id/edtResPhoneNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResDOB"
-                    app:layout_constraintStart_toStartOf="@id/edtResDOB"
-                    tools:text="0987654321" />
+                    <EditText
+                        android:id="@+id/edtResPhoneNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResDOB"
+                        app:layout_constraintStart_toStartOf="@id/edtResDOB"
+                        tools:hint="0987654321" />
 
-                <TextView
-                    android:id="@+id/tvDOB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="DOB:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResDOB" />
+                    <TextView
+                        android:id="@+id/tvDOB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="DOB:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResDOB" />
 
-                <EditText
-                    android:id="@+id/edtResDOB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:enabled="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResPlace"
-                    app:layout_constraintStart_toStartOf="@id/edtResPlace"
-                    tools:text="DOB" />
+                    <EditText
+                        android:id="@+id/edtResDOB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResPlace"
+                        app:layout_constraintStart_toStartOf="@id/edtResPlace"
+                        tools:hint="DOB" />
 
-                <TextView
-                    android:id="@+id/tvPlace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="Place:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResPlace" />
+                    <TextView
+                        android:id="@+id/tvPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="Place:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResPlace" />
 
-                <EditText
-                    android:id="@+id/edtResPlace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResExperience"
-                    app:layout_constraintStart_toStartOf="@id/edtResExperience"
-                    tools:text="Place" />
+                    <EditText
+                        android:id="@+id/edtResPlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResExperience"
+                        app:layout_constraintStart_toStartOf="@id/edtResExperience"
+                        tools:hint="Place" />
 
-                <TextView
-                    android:id="@+id/tvExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="Experience:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResExperience" />
+                    <TextView
+                        android:id="@+id/tvExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="Experience(year):"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResExperience" />
 
-                <EditText
-                    android:id="@+id/edtResExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/edtResEducation"
-                    app:layout_constraintStart_toEndOf="@id/tvExperience"
-                    tools:text="experience here" />
+                    <EditText
+                        android:id="@+id/edtResExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/edtResEducation"
+                        app:layout_constraintStart_toEndOf="@id/tvExperience"
+                        tools:hint="experience here" />
 
-                <TextView
-                    android:id="@+id/tvEducation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/lora_medium"
-                    android:text="Education:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtResEducation" />
+                    <TextView
+                        android:id="@+id/tvEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lora_medium"
+                        android:text="Education:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edtResEducation" />
 
-                <EditText
-                    android:id="@+id/edtResEducation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:enabled="false"
-                    android:fontFamily="@font/lora_medium"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvExperience"
-                    tools:text="Education" />
+                    <EditText
+                        android:id="@+id/edtResEducation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:enabled="false"
+                        android:fontFamily="@font/lora_medium"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvExperience"
+                        tools:hint="Education" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="60dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/background_button"
-            android:text="LogOut"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/background_button"
+                android:text="LogOut"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUpdate"
@@ -279,8 +286,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/background_button"
                 android:text="Update"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </FrameLayout>
     </LinearLayout>

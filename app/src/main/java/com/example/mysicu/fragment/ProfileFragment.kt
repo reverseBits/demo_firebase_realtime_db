@@ -46,9 +46,9 @@ class ProfileFragment : Fragment() {
         Navigation.findNavController(mBinding.root)
     }
 
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
@@ -60,6 +60,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.btnUpdate.visibility = View.GONE
+        mBinding.ivUpload.visibility = View.GONE
+
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Admin")
@@ -77,12 +79,13 @@ class ProfileFragment : Fragment() {
             mBinding.edtResExperience.isEnabled = true
             mBinding.edtResEducation.isEnabled = true
             mBinding.btnLogOut.visibility = View.GONE
+            mBinding.ivUpload.visibility = View.VISIBLE
             mBinding.btnUpdate.visibility = View.VISIBLE
+            mBinding.titalBar.ivprofile.visibility = View.GONE
         }
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("TAG", "onDataChange: ${snapshot.child("name").getValue(String::class.java)}")
                 mBinding.edtResName.setText(snapshot.child("name").getValue(String::class.java))
                 mBinding.edtResEmailId.setText(snapshot.child("email").getValue(String::class.java))
                 mBinding.edtResPhoneNo.setText(
@@ -91,11 +94,18 @@ class ProfileFragment : Fragment() {
                 mBinding.edtResDOB.setText(snapshot.child("dob").getValue(String::class.java))
                 mBinding.edtResPlace.setText(snapshot.child("place").getValue(String::class.java))
                 mBinding.edtResExperience.setText(
-                    snapshot.child("experience").getValue(String::class.java) + " Year"
+                    snapshot.child("experience").getValue(String::class.java)
                 )
                 mBinding.edtResEducation.setText(
                     snapshot.child("qualification").getValue(String::class.java)
                 )
+
+                val uri = Uri.parse(snapshot.child("image").getValue(String::class.java))
+                Glide.with(requireContext()).load(uri).placeholder(R.drawable.user_profile_icon)
+                    .into(mBinding.imgUserImage)
+
+
+
 
                 Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
             }
@@ -107,7 +117,7 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        mBinding.ivprofile.setOnClickListener {
+        mBinding.ivUpload.setOnClickListener {
             openGallary()
         }
 
@@ -119,18 +129,15 @@ class ProfileFragment : Fragment() {
 
             val c = Calendar.getInstance()
 
-
             val year = c[Calendar.YEAR]
             val month = c[Calendar.MONTH]
             val day = c[Calendar.DAY_OF_MONTH]
 
 
             val datePickerDialog = DatePickerDialog(
-                requireContext(),
-                { view, year, monthOfYear, dayOfMonth ->
+                requireContext(), { view, year, monthOfYear, dayOfMonth ->
                     mBinding.edtResDOB.setText(dayOfMonth.toString() + "/" + (monthOfYear + 1) + "/" + year)
-                },
-                year, month, day
+                }, year, month, day
             )
 
             datePickerDialog.show()
@@ -142,6 +149,54 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
         }
 
+
+        mBinding.btnUpdate.setOnClickListener {
+            UpdateData()
+        }
+
+    }
+
+    private fun UpdateData() {
+
+        val name = mBinding.edtResName.text.toString()
+        val phoneNo = mBinding.edtResPhoneNo.text.toString()
+        val dob = mBinding.edtResDOB.text.toString()
+        val location = mBinding.edtResPlace.text.toString()
+        val exp = mBinding.edtResExperience.text.toString()
+        val que = mBinding.edtResEducation.text.toString()
+
+
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                database.child("name").setValue(name)
+                database.child("phoneNo").setValue(phoneNo)
+                database.child("dob").setValue(dob)
+                database.child("place").setValue(location)
+                database.child("qualification").setValue(que)
+                database.child("experience").setValue(exp)
+                database.child("image").setValue(image)
+
+
+                mBinding.edtResName.isEnabled = false
+                mBinding.edtResPhoneNo.isEnabled = false
+                mBinding.edtResDOB.isEnabled = false
+                mBinding.edtResDOB.isClickable = false
+                mBinding.edtResPlace.isEnabled = false
+                mBinding.edtResExperience.isEnabled = false
+                mBinding.edtResEducation.isEnabled = false
+                mBinding.btnLogOut.visibility = View.VISIBLE
+                mBinding.ivUpload.visibility = View.GONE
+                mBinding.btnUpdate.visibility = View.GONE
+                mBinding.titalBar.ivprofile.visibility = View.VISIBLE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+
     }
 
 
@@ -150,38 +205,34 @@ class ProfileFragment : Fragment() {
         changeImage.launch(intent)
     }
 
-    private val changeImage =
-        registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val data = it.data
-                val imgUri = data?.data
+    private val changeImage = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data = it.data
+            val imgUri = data?.data
 
-                val sd = getFileName(requireContext(), imgUri!!)
+            val sd = getFileName(requireContext(), imgUri!!)
 
-                val uploadTask = storageRef.child("profile/$sd").putFile(imgUri)
-                uploadTask.addOnSuccessListener {
+            val uploadTask = storageRef.child("profile/$sd").putFile(imgUri)
+            uploadTask.addOnSuccessListener {
 
-                    storageRef.child("profile/$sd").downloadUrl.addOnSuccessListener {
-                        Glide.with(this)
-                            .load(imgUri)
-                            .circleCrop()
-                            .into(mBinding.imgUserImage)
+                storageRef.child("profile/$sd").downloadUrl.addOnSuccessListener {
+                    Glide.with(this).load(imgUri).circleCrop().into(mBinding.imgUserImage)
 
-                        image = imgUri.toString()
+                    image = imgUri.toString()
 
-                        mBinding.ivprofile.visibility = View.GONE
-                    }.addOnFailureListener {
-                        Log.e("Firebase", "Failed in downloading")
-                    }
+                    mBinding.ivUpload.visibility = View.GONE
                 }.addOnFailureListener {
-                    Log.e("Firebase", "Image Upload fail")
+                    Log.e("Firebase", "Failed in downloading")
                 }
-
-
+            }.addOnFailureListener {
+                Log.e("Firebase", "Image Upload fail")
             }
+
+
         }
+    }
 
     @SuppressLint("Range")
     private fun getFileName(context: Context, uri: Uri): String? {

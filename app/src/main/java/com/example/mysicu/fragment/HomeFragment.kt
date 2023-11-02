@@ -1,16 +1,15 @@
 package com.example.mysicu.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.mysicu.R
-import com.example.mysicu.adapter.HomeAdapter
 import com.example.mysicu.databinding.FragmentHomeBinding
 import com.example.mysicu.models.HomeMenuData
 import com.example.mysicu.viewModels.HomeViewModels
@@ -23,7 +22,7 @@ class HomeFragment : Fragment() {
     lateinit var auth: FirebaseAuth
     private val viewModel: HomeViewModels by viewModels()
     private val homeMenuDataList: ArrayList<HomeMenuData> = ArrayList()
-    private lateinit var homeAdaptor: HomeAdapter
+//    private lateinit var homeAdaptor: HomeAdapter
 
 
     override fun onCreateView(
@@ -38,15 +37,24 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        homeAdaptor = HomeAdapter(homeMenuDataList, this)
-        mBinding.recMenu.adapter = homeAdaptor
+//        homeAdaptor = HomeAdapter(homeMenuDataList, this)
+//        mBinding.recMenu.adapter = homeAdaptor
+
+
+        mBinding.cvNursingStaff.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_staffListFragment)
+        }
+        mBinding.ivprofile.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
 
         viewModel.getHomeMenuDataData()
             .observe(viewLifecycleOwner, object : Observer<List<HomeMenuData>> {
                 override fun onChanged(value: List<HomeMenuData>) {
                     homeMenuDataList.clear()
                     homeMenuDataList.addAll(value)
-                    homeAdaptor.notifyDataSetChanged()
+//                    homeAdaptor.notifyDataSetChanged()
                 }
 
             })
@@ -54,10 +62,7 @@ class HomeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
 
-
-
-
-
     }
+    
 
 }

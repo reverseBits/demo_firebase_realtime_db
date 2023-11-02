@@ -1,9 +1,10 @@
-package com.example.mysicu
+package com.example.mysicu.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import com.example.mysicu.R
 import com.example.mysicu.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -16,4 +17,5 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProvider(this).get()
     }
+
 }

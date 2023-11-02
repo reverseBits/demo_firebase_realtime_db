@@ -13,7 +13,6 @@ class HomeViewModels() : ViewModel() {
     private val homeMenuMutableLiveData: MutableLiveData<List<HomeMenuData>> = MutableLiveData()
 
     init {
-
         getHomeMenuData()
     }
 

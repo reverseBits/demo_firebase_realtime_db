@@ -34,6 +34,9 @@
             app:destination="@id/addStaffFragment"
             app:enterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_staffListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/staffDetailsFragment"

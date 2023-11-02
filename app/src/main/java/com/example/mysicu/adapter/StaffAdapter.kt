@@ -30,12 +30,13 @@ class StaffAdapter(val staffList: List<StaffModel>) : RecyclerView.Adapter<Staff
     override fun onBindViewHolder(holder: StaffViewHolder, position: Int) {
         val staffModel = staffList[position]
         holder.binding.tvName.text = staffModel.name
-        holder.binding.tvEmpId.text = staffModel.empId
+//        holder.binding.tvEmpId.text = staffModel.empId
+        holder.binding.tvType.text = "Gynaecologist"
 
         Glide.with(holder.binding.root)
             .load(staffModel.image)
             .circleCrop()
-            .placeholder(R.drawable.ic_baseline_person_24)
+            .placeholder(R.drawable.icon_doctor)
             .into(holder.binding.ivEmp)
 
 

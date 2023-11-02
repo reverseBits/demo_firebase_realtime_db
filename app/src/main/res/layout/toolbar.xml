@@ -13,77 +13,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:layout_marginBottom="@dimen/_5sdp">
 
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:layout_marginTop="-15.60dp"
-            android:layout_marginBottom="8.40dp"
-            android:padding="6dp"
-            app:cardCornerRadius="14.40dp"
-            app:cardElevation="2.40dp"
-            app:contentPaddingTop="15.60dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15.60dp">
 
-            <FrameLayout
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="36.20dp"
+                android:layout_height="36.20dp"
+                android:layout_marginRight="9.60dp"
+                android:adjustViewBounds="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="3.60dp"
+                android:src="@drawable/west_24px"
+                app:tint="#5155D5" />
+
+            <TextView
+                android:id="@+id/tvToolbarTitle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Staff"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="@dimen/_20ssp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivprofile"
+                android:layout_width="36.20dp"
+                android:layout_height="36.20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/toolbar_round_backround"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/white" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="15.60dp">
-
-                    <ImageView
-                        android:id="@+id/ivBack"
-                        android:layout_width="31.20dp"
-                        android:layout_height="31.20dp"
-                        android:layout_marginRight="9.60dp"
-                        android:adjustViewBounds="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        android:padding="3.60dp"
-                        android:src="@drawable/back_icon" />
-
-                    <TextView
-                        android:id="@+id/tvToolbarTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Staff"
-                        android:textFontWeight="500"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="@dimen/_20ssp" />
-
-                    <ImageView
-                        android:id="@+id/ivprofile"
-                        android:layout_width="31.20dp"
-                        android:layout_height="31.20dp"
-                        android:layout_marginRight="9.60dp"
-                        android:adjustViewBounds="true"
-                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                        android:padding="3.60dp"
-                        android:src="@drawable/ic_baseline_person_24" />
-
-
-                </LinearLayout>
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/tvUpdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:indeterminate="true"
-                    android:visibility="invisible" />
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

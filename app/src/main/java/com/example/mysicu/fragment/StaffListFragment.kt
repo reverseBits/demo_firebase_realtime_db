@@ -49,6 +49,11 @@ class StaffListFragment : Fragment() {
         mBinding.titleBar.ivBack.setOnClickListener {
             navController.navigateUp()
         }
+        mBinding.titleBar.ivprofile.setOnClickListener {
+
+            findNavController().navigate(R.id.profileFragment)
+
+        }
 
         mBinding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.action_staffListFragment_to_addStaffFragment)
