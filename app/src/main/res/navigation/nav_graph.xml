@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mysicu.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_staffListFragment"
+            app:destination="@id/staffListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_doctorListFragment"
+            app:destination="@id/doctorListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffListFragment"
+        android:name="com.example.mysicu.fragment.nurse.NursingStaffListFragment"
+        android:label="StaffListFragment"
+        tools:layout="@layout/fragment_nursing_staff_list">
+        <action
+            android:id="@+id/action_staffListFragment_to_staffDetailsFragment"
+            app:destination="@id/staffDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_left" />
+        <action
+            android:id="@+id/action_staffListFragment_to_addStaffFragment"
+            app:destination="@id/addStaffFragment"
+            app:enterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_staffListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffDetailsFragment"
+        android:name="com.example.mysicu.fragment.nurse.NursingStaffDetailsFragment"
+        android:label="StaffDetailsFragment"
+        tools:layout="@layout/fragment_nursing_staff_details">
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_updateStaffFragment"
+            app:destination="@id/updateStaffFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_left" />
+        <argument
+            android:name="staffModel"
+            app:argType="com.example.mysicu.models.StaffModel"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStaffFragment"
+        android:name="com.example.mysicu.fragment.nurse.AddNursingStaffFragment"
+        android:label="AddStaffFragment"
+        tools:layout="@layout/fragment_add_nursing_staff">
+        <action
+            android:id="@+id/action_addStaffFragment_to_staffListFragment"
+            app:destination="@id/staffListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateStaffFragment"
+        android:name="com.example.mysicu.fragment.nurse.UpdateNursingStaffFragment"
+        android:label="UpdateStaffFragment"
+        tools:layout="@layout/fragment_update_nursing_staff">
+        <argument
+            android:name="staffModel"
+            app:argType="com.example.mysicu.models.StaffModel"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_updateStaffFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mysicu.auth.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.mysicu.auth.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mysicu.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorListFragment"
+        android:name="com.example.mysicu.fragment.doctor.DoctorListFragment"
+        android:label="DoctorListFragment"
+        tools:layout="@layout/fragment_doctor_list">
+        <action
+            android:id="@+id/action_doctorListFragment_to_addNewDoctorFragment"
+            app:destination="@id/addNewDoctorFragment" />
+        <action
+            android:id="@+id/action_doctorListFragment_to_doctorDetailsFragment"
+            app:destination="@id/doctorDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/addNewDoctorFragment"
+        android:name="com.example.mysicu.fragment.doctor.AddNewDoctorFragment"
+        android:label="AddNewDoctorFragment"
+        tools:layout="@layout/fragment_add_new_doctor"/>
+    <fragment
+        android:id="@+id/doctorDetailsFragment"
+        android:name="com.example.mysicu.fragment.doctor.DoctorDetailsFragment"
+        android:label="DoctorDetailsFragment"
+        tools:layout="@layout/fragment_doctor_details">
+
+        <argument
+            android:name="staffmodel"
+            app:argType="com.example.mysicu.models.StaffModel"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_doctorDetailsFragment_to_updateDoctorDetailsFragment"
+            app:destination="@id/updateDoctorDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateDoctorDetailsFragment"
+        android:name="com.example.mysicu.fragment.doctor.UpdateDoctorDetailsFragment"
+        android:label="UpdateDoctorDetailsFragment"
+        tools:layout="@layout/fragment_update_doctor_details">
+        <argument
+            android:name="staffModel"
+            app:argType="com.example.mysicu.models.StaffModel"
+            app:nullable="true" />
+    </fragment>
+</navigation>

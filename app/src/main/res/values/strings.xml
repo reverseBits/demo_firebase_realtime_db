@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MySICU</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="client_id">741453930989–5d4n2kg2v61haqkot8altn1phi177n7l.apps.googleusercontent.com</string>
+
+    <string name="ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+
+    <string-array name="nurse_type">
+        <item>Supervisor</item>
+        <item>Incharge</item>
+        <item>NS -  Nursing Superintendent</item>
+        <item>ANS - Assistant Nursing Superintendent</item>
+    </string-array>
+
+</resources>
