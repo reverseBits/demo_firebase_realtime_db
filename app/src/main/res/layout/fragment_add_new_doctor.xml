@@ -26,8 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:orientation="vertical"
-                tools:context=".AddStaffActivity">
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -83,10 +82,11 @@
                             app:startIconDrawable="@drawable/call_24px">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edtEmpId"
+                                android:id="@+id/edtMobileNo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="number" />
+                                android:inputType="number"
+                                android:maxLength="10"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -107,6 +107,21 @@
                                 android:focusable="false"
                                 android:focusableInTouchMode="false" />
                         </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/ddDoctorType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:hint="Select"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

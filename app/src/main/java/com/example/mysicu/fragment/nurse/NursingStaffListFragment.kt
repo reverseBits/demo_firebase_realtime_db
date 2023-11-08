@@ -1,4 +1,4 @@
-package com.example.mysicu.fragment
+package com.example.mysicu.fragment.nurse
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView.OnQueryTextListener
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -15,14 +17,14 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.mysicu.R
 import com.example.mysicu.adapter.StaffAdapter
-import com.example.mysicu.databinding.FragmentStaffListBinding
+import com.example.mysicu.databinding.FragmentNursingStaffListBinding
 import com.example.mysicu.models.StaffModel
 import com.example.mysicu.viewModels.StaffListingViewModel
 
 
-class StaffListFragment : Fragment() {
+class NursingStaffListFragment : Fragment() {
 
-    lateinit var mBinding: FragmentStaffListBinding
+    lateinit var mBinding: FragmentNursingStaffListBinding
     private val viewModel: StaffListingViewModel by viewModels()
     private val navController: NavController by lazy {
         findNavController(mBinding.root)
@@ -33,14 +35,18 @@ class StaffListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_staff_list, container, false)
+        mBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_nursing_staff_list,
+            container,
+            false
+        )
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        staffAdapter = StaffAdapter(staffList)
+        staffAdapter = StaffAdapter(staffList, "Nurse List")
         mBinding.recyclerView.adapter = staffAdapter
         getData()
 
@@ -90,5 +96,7 @@ class StaffListFragment : Fragment() {
                 }
             })
     }
+
+
 }
 

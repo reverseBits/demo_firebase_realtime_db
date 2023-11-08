@@ -14,26 +14,27 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class StaffListingViewModel : ViewModel() {
+class DoctorStaffListingViewModel : ViewModel() {
 
     private val firebaseRepository: FireBaseRepo = FireBaseRepo()
 
-    private val staffListingMutableLiveData = MutableLiveData<List<StaffModel>>()
+    private val doctorStaffListingMutableLiveData = MutableLiveData<List<StaffModel>>()
 
 
     init {
-        getStaffList()
+        getDoctorStaffList()
     }
 
-    fun getStaffListLiveData(): LiveData<List<StaffModel>> {
 
-        return staffListingMutableLiveData
+    fun getDoctorStaffListLiveData(): LiveData<List<StaffModel>> {
+
+        return doctorStaffListingMutableLiveData
     }
 
-    fun getStaffList() {
-        firebaseRepository.getStaffData().observeForever(object : Observer<List<StaffModel>> {
+    fun getDoctorStaffList() {
+        firebaseRepository.getDoctorStaffData().observeForever(object : Observer<List<StaffModel>> {
             override fun onChanged(value: List<StaffModel>) {
-                staffListingMutableLiveData.postValue(value)
+                doctorStaffListingMutableLiveData.postValue(value)
             }
 
         })

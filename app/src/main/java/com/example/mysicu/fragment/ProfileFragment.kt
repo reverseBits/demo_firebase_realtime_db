@@ -103,10 +103,6 @@ class ProfileFragment : Fragment() {
                 val uri = Uri.parse(snapshot.child("image").getValue(String::class.java))
                 Glide.with(requireContext()).load(uri).placeholder(R.drawable.user_profile_icon)
                     .into(mBinding.imgUserImage)
-
-
-
-
                 Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
             }
 
@@ -157,7 +153,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun UpdateData() {
-
         val name = mBinding.edtResName.text.toString()
         val phoneNo = mBinding.edtResPhoneNo.text.toString()
         val dob = mBinding.edtResDOB.text.toString()
@@ -217,15 +212,13 @@ class ProfileFragment : Fragment() {
             val uploadTask = storageRef.child("profile/$sd").putFile(imgUri)
             uploadTask.addOnSuccessListener {
 
-                storageRef.child("profile/$sd").downloadUrl.addOnSuccessListener {
-                    Glide.with(this).load(imgUri).circleCrop().into(mBinding.imgUserImage)
+                it.storage.downloadUrl.addOnSuccessListener {
 
-                    image = imgUri.toString()
-
-                    mBinding.ivUpload.visibility = View.GONE
-                }.addOnFailureListener {
-                    Log.e("Firebase", "Failed in downloading")
+                    Log.d("TAG", "uri$it: ")
+                    Glide.with(this).load(it).circleCrop().into(mBinding.imgUserImage)
+                    image = it.toString()
                 }
+                mBinding.ivUpload.visibility = View.GONE
             }.addOnFailureListener {
                 Log.e("Firebase", "Image Upload fail")
             }

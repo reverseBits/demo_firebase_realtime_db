@@ -145,7 +145,7 @@ class SignUpFragment : Fragment() {
                 user!!.sendEmailVerification().addOnSuccessListener {
                     Toast.makeText(requireContext(), "Send", Toast.LENGTH_SHORT).show()
                     addData()
-                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+//                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
                     Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()

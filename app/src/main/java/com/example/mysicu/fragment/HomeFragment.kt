@@ -47,6 +47,9 @@ class HomeFragment : Fragment() {
         mBinding.ivprofile.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
+        mBinding.cvDoctor.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_doctorListFragment)
+        }
 
 
         viewModel.getHomeMenuDataData()

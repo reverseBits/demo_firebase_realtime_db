@@ -1,63 +1,59 @@
-package com.example.mysicu.fragment
+package com.example.mysicu.fragment.doctor
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mysicu.R
 import com.example.mysicu.adapter.QualificationListAdapter
-import com.example.mysicu.databinding.FragmentAddStaffBinding
+import com.example.mysicu.databinding.FragmentAddNewDoctorBinding
 import com.example.mysicu.models.StaffModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import java.util.Calendar
 
+class AddNewDoctorFragment : Fragment() {
 
-class AddStaffFragment : Fragment() {
-
-    lateinit var mBinding: FragmentAddStaffBinding
+    lateinit var mBinding: FragmentAddNewDoctorBinding
     lateinit var dbRef: DatabaseReference
     private val navController: NavController by lazy {
         Navigation.findNavController(mBinding.root)
     }
     private val qualificationList: ArrayList<String> = ArrayList()
+    private val doctorTypeList: ArrayList<String> = ArrayList()
     private lateinit var qualificationListAdapter: QualificationListAdapter
-    var image: String? = null
-//    var employeeId = 0
-
-    // creating a storage reference
-    private var storageRef = Firebase.storage.reference
-
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_staff, container, false)
+        // Inflate the layout for this fragment
+        mBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_add_new_doctor, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dbRef = FirebaseDatabase.getInstance().getReference("Stafflist")
-        storageRef = FirebaseStorage.getInstance().getReference()
+        dbRef = FirebaseDatabase.getInstance().getReference("DoctorList")
 
-        qualificationListAdapter = QualificationListAdapter(qualificationList)
+
+        qualificationListAdapter = QualificationListAdapter(qualificationList, "AddStaff")
         mBinding.rvQualificationList.adapter = qualificationListAdapter
 
         if (qualificationList.isEmpty()) {
@@ -68,7 +64,29 @@ class AddStaffFragment : Fragment() {
 
 
 
-        mBinding.titleBar.tvToolbarTitle.text = "Add Staff"
+        doctorTypeList.add("gynecologist")
+        doctorTypeList.add("Cardiologist")
+        doctorTypeList.add("Audiologist")
+        doctorTypeList.add("Dentist")
+        doctorTypeList.add("ENT Specialists")
+        doctorTypeList.add("Gynecologist")
+        doctorTypeList.add("Orthopedic ")
+        doctorTypeList.add("Radiologist ")
+        doctorTypeList.add("Pediatrician ")
+        doctorTypeList.add("Psychiatrist ")
+        doctorTypeList.add("Pulmonologist ")
+        doctorTypeList.add("Endocrinologist ")
+        doctorTypeList.add("Oncologist ")
+        doctorTypeList.add("Neurologist ")
+        doctorTypeList.add("Cardiothoracic Surgeon")
+
+
+        var adapter = ArrayAdapter(requireContext(), R.layout.item_dropdownmenu, doctorTypeList)
+
+        mBinding.ddDoctorType.setAdapter(adapter)
+
+
+        mBinding.titleBar.tvToolbarTitle.text = "Add New"
         mBinding.titleBar.ivprofile.visibility = View.GONE
         mBinding.titleBar.ivBack.setOnClickListener {
             navController.navigateUp()
@@ -96,7 +114,7 @@ class AddStaffFragment : Fragment() {
                     edtUniversity.error = "Please enter Field"
                 } else {
                     var qualification =
-                        edtQualification.text.toString() + "," + edtUniversity.text.toString()
+                        edtQualification.text.toString() + " - " + edtUniversity.text.toString()
                     qualificationList.add(qualification)
                     qualificationListAdapter.notifyDataSetChanged()
                     mBinding.cvEdu.visibility = View.VISIBLE
@@ -107,14 +125,9 @@ class AddStaffFragment : Fragment() {
             dialog.show()
         }
 
-//        mBinding.ivprofile.setOnClickListener {
-//            openGallary()
-//        }
-
         mBinding.btnAdd.setOnClickListener {
             addStaff()
         }
-
 
         mBinding.edtDob.setOnClickListener {
 
@@ -153,35 +166,69 @@ class AddStaffFragment : Fragment() {
             )
             datePickerDialog.show()
         }
+
     }
 
     private fun addStaff() {
         // get data from editText
         val name = mBinding.edtName.text.toString()
-        val empId = mBinding.edtEmpId.text.toString()
+        val email = mBinding.edtEmailId.text.toString()
+        val phoneNo = mBinding.edtMobileNo.text.toString()
         val dob = mBinding.edtDob.text.toString()
         val doj = mBinding.edtDoj.text.toString()
         val place = mBinding.edtPlace.text.toString()
         val experience = mBinding.edtExperience.text.toString()
+        val delQualification = qualificationList.toString()
+        val nurseType = mBinding.ddDoctorType.text.toString()
+
+        val refQualification = delQualification.replace("[", "")
+        val qualification = refQualification.replace("]", "")
 
 
 
-        if (name.isEmpty()) {
+        if (name.isNullOrEmpty()) {
             mBinding.edtName.error = "Please enter name"
-        } else if (empId.isEmpty()) {
-            mBinding.edtEmpId.error = "Please enter empId"
+        } else if (email.isEmpty()) {
+            mBinding.edtEmailId.error = "Please enter empId"
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.trim { it <= ' ' })
+                .matches() && !Patterns.PHONE.matcher(email.trim { it <= ' ' }).matches()
+        ) {
+            mBinding.edtEmailId.error = "enter valid email"
+        } else if (phoneNo.isNullOrEmpty()) {
+            mBinding.edtMobileNo.error = "Please Enter MobileNo"
+        } else if (!Patterns.PHONE.matcher(
+                mBinding.edtMobileNo.getText().toString().trim { it <= ' ' })
+                .matches() || mBinding.edtMobileNo.getText().toString()
+                .trim { it <= ' ' }.length < 10 || mBinding.edtMobileNo.getText().toString()
+                .trim { it <= ' ' }.length > 10
+        ) {
+            mBinding.edtMobileNo.error = "valid Mobile No"
         } else if (dob.isEmpty()) {
             mBinding.edtDob.error = "Please enter dob"
         } else if (doj.isEmpty()) {
             mBinding.edtDoj.error = "Please enter doj"
         } else if (place.isEmpty()) {
             mBinding.edtPlace.error = "Please enter place"
-        } else if (experience.isEmpty()) {
-            mBinding.edtExperience.error = "Please enter experience"
+        } else if (qualificationList.isEmpty()) {
+            mBinding.edtQualification.error = "Please Add Qualification"
+        } else if (nurseType.equals("Select")) {
+            mBinding.ddDoctorType.error = "Please select Doctor Type"
         } else {
 //            val empId = employeeId + 1
             val staffId = dbRef.push().key!!
-            val staffModel = StaffModel(staffId, name, empId, dob, doj, place, experience, image)
+            val staffModel = StaffModel(
+                staffId,
+                name,
+                email,
+                phoneNo,
+                dob,
+                doj,
+                nurseType,
+                qualification,
+                experience,
+                place,
+                ""
+            )
 
             dbRef.child(staffId).setValue(staffModel).addOnCompleteListener {
                 Toast.makeText(context, "Add data Successfully", Toast.LENGTH_SHORT).show()
@@ -194,56 +241,4 @@ class AddStaffFragment : Fragment() {
         }
     }
 
-//    private fun openGallary() {
-//        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//        changeImage.launch(intent)
-//    }
-//
-//    private val changeImage =
-//        registerForActivityResult(
-//            ActivityResultContracts.StartActivityForResult()
-//        ) {
-//            if (it.resultCode == Activity.RESULT_OK) {
-//                val data = it.data
-//                val imgUri = data?.data
-//
-//                val sd = getFileName(requireContext(), imgUri!!)
-//
-//                val uploadTask = storageRef.child("profile/$sd").putFile(imgUri)
-//                uploadTask.addOnSuccessListener {
-//
-//                    storageRef.child("profile/$sd").downloadUrl.addOnSuccessListener {
-//                        Glide.with(this)
-//                            .load(imgUri)
-//                            .circleCrop()
-//                            .into(mBinding.imgUserImage)
-//
-//                        image = imgUri.toString()
-//
-//                        mBinding.ivprofile.visibility = View.GONE
-//                    }.addOnFailureListener {
-//                        Log.e("Firebase", "Failed in downloading")
-//                    }
-//                }.addOnFailureListener {
-//                    Log.e("Firebase", "Image Upload fail")
-//                }
-//
-//
-//            }
-//        }
-//
-//    @SuppressLint("Range")
-//    private fun getFileName(context: Context, uri: Uri): String? {
-//        if (uri.scheme == "content") {
-//            val cursor = context.contentResolver.query(uri, null, null, null, null)
-//            cursor.use {
-//                if (cursor != null) {
-//                    if (cursor.moveToFirst()) {
-//                        return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-//                    }
-//                }
-//            }
-//        }
-//        return uri.path?.lastIndexOf('/')?.let { uri.path?.substring(it) }
-//    }
 }

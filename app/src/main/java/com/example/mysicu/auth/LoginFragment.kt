@@ -37,9 +37,9 @@ class LoginFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        mBinding.tvSignUp.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
-        }
+//        mBicnding.tvSignUp.setOnClickListener {
+//            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+//        }
 
         mBinding.btnLogin.setOnClickListener {
 

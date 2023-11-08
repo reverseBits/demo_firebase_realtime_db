@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mtrl_textinput_default_box_stroke_color">#807B7979</color>
     <color name="cancel">#FF725E</color>
+    <color name="secondary_text_color">#414141</color>
 </resources>

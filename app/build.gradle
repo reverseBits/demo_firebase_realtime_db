@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -77,4 +78,14 @@ dependencies {
 
     implementation ("com.intuit.ssp:ssp-android:1.1.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
+
+
+//    crashlytics
+
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+
+    //    Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 }

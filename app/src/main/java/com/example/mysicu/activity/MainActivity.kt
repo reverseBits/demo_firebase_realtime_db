@@ -2,6 +2,8 @@ package com.example.mysicu.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.example.mysicu.R
@@ -16,6 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainViewModel = ViewModelProvider(this).get()
+
+
+
     }
 
 }
