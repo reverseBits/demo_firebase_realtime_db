@@ -95,7 +95,7 @@ class SignUpFragment : Fragment() {
 
         var userId = user?.uid
 
-        val admin = AdminData(name, email, phoneNo, dob, qualification, exp, place,null)
+        val admin = AdminData(name, email, phoneNo, dob, qualification, exp, place, null, "no")
 
         database.child(userId.toString()).setValue(admin).addOnSuccessListener {
             Toast.makeText(requireContext(), "Data Successfully Add", Toast.LENGTH_SHORT).show()
@@ -145,8 +145,12 @@ class SignUpFragment : Fragment() {
                 user!!.sendEmailVerification().addOnSuccessListener {
                     Toast.makeText(requireContext(), "Send", Toast.LENGTH_SHORT).show()
                     addData()
-//                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                    Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+                    Toast.makeText(
+                        requireContext(),
+                        "your registration is under process please log in after 24hr",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }.addOnFailureListener {
                     Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
                 }

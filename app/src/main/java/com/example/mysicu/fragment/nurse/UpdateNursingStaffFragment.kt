@@ -269,20 +269,20 @@ class UpdateNursingStaffFragment : Fragment() {
 
         Log.d("TAG", "updateData: $qualification")
 
-        val staffModel =
-            StaffModel(
-                args.staffModel?.staffId,
-                name,
-                email,
-                phoneNo,
-                dob,
-                doj,
-                type,
-                qualification,
-                experience,
-                place,
-                image
-            )
+        val staffModel = StaffModel(
+            args.staffModel?.staffId,
+            name,
+            email,
+            phoneNo,
+            dob,
+            doj,
+            type,
+            qualification,
+            experience,
+            place,
+            "",
+            image
+        )
 
         viewModel.updateDetails(staffModel)
     }
