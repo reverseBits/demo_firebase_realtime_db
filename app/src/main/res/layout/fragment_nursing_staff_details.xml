@@ -95,6 +95,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
+                                    android:id="@+id/lnrPatients"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -108,10 +109,10 @@
                                         android:fontFamily="@font/lora_medium"
                                         android:text="PATIENTS"
                                         android:textColor="#C2C6DF"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
+                                        android:textSize="14sp" />
 
                                     <TextView
+                                        android:id="@+id/tvRsPatients"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="16dp"
@@ -138,8 +139,7 @@
                                         android:fontFamily="@font/lora_medium"
                                         android:text="EXPERINCE"
                                         android:textColor="#C2C6DF"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold" />
+                                        android:textSize="14sp" />
 
                                     <TextView
                                         android:id="@+id/tvExp"

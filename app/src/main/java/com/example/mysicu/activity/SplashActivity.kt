@@ -11,6 +11,8 @@ class SplashActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+
+
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

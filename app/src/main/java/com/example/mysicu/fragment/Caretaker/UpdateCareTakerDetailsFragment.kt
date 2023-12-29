@@ -1,9 +1,8 @@
-package com.example.mysicu.fragment.doctor
+package com.example.mysicu.fragment.Caretaker
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -15,10 +14,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -30,39 +25,36 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.mysicu.R
-import com.example.mysicu.adapter.QualificationListAdapter
-import com.example.mysicu.databinding.FragmentDoctorDetailsBinding
-import com.example.mysicu.databinding.FragmentUpdateDoctorDetailsBinding
+import com.example.mysicu.databinding.FragmentUpdateCareTakerDetailsBinding
 import com.example.mysicu.models.StaffModel
 import com.example.mysicu.viewModels.MainViewModel
-import com.example.mysicu.viewModels.UpdatingDoctorStaffViewModel
+import com.example.mysicu.viewModels.UpdatingCareTakerStaffViewModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.util.Calendar
 
-class UpdateDoctorDetailsFragment : Fragment() {
 
-    lateinit var mBinding: FragmentUpdateDoctorDetailsBinding
-    private val args: UpdateDoctorDetailsFragmentArgs by navArgs()
+class UpdateCareTakerDetailsFragment : Fragment() {
+
+    lateinit var mBinding: FragmentUpdateCareTakerDetailsBinding
+    private val args: UpdateCareTakerDetailsFragmentArgs by navArgs()
     private lateinit var dbRef: DatabaseReference
     var image: String? = null
     private var storageRef = Firebase.storage.reference
-    private lateinit var viewModel: UpdatingDoctorStaffViewModel
+    lateinit var viewModel: UpdatingCareTakerStaffViewModel
     private lateinit var mainViewModel: MainViewModel
     private val navController: NavController by lazy {
         Navigation.findNavController(mBinding.root)
     }
-    private val qualificationList: ArrayList<String> = ArrayList()
-    private lateinit var qualificationListAdapter: QualificationListAdapter
-    private val doctorTypeList: ArrayList<String> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_update_doctor_details, container, false
+            inflater, R.layout.fragment_update_care_taker_details, container, false
         )
         return mBinding.root
     }
@@ -71,45 +63,16 @@ class UpdateDoctorDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get()
         mainViewModel = ViewModelProvider(requireActivity()).get()
-        dbRef = FirebaseDatabase.getInstance().getReference("DoctorList")
+        dbRef = FirebaseDatabase.getInstance().getReference("caretakerList")
 
         mBinding.titleBar.tvToolbarTitle.setText("Update")
         mBinding.titleBar.ivprofile.visibility = View.GONE
-
-        qualificationListAdapter = QualificationListAdapter(qualificationList, "StaffDetails")
-        mBinding.rvQualificationList.adapter = qualificationListAdapter
 
 
         val refQualification = args.staffModel?.qualification
 
         val qualification = refQualification?.split(", ")
         Log.d("TAG", "setStaffDetailModel: $qualification")
-
-        if (qualification != null) {
-            for (substring in qualification) {
-                qualificationList.add(substring)
-            }
-            mBinding.cvEdu.visibility = View.VISIBLE
-            qualificationListAdapter.notifyDataSetChanged()
-        } else {
-            mBinding.cvEdu.visibility = View.GONE
-        }
-
-        doctorTypeList.add("gynecologist")
-        doctorTypeList.add("Cardiologist")
-        doctorTypeList.add("Audiologist")
-        doctorTypeList.add("Dentist")
-        doctorTypeList.add("ENT Specialists")
-        doctorTypeList.add("Gynecologist")
-        doctorTypeList.add("Orthopedic ")
-        doctorTypeList.add("Radiologist ")
-        doctorTypeList.add("Pediatrician ")
-        doctorTypeList.add("Psychiatrist ")
-        doctorTypeList.add("Pulmonologist ")
-        doctorTypeList.add("Endocrinologist ")
-        doctorTypeList.add("Oncologist ")
-        doctorTypeList.add("Neurologist ")
-        doctorTypeList.add("Cardio-thoracic Surgeon")
 
 
         //    get data from staffDetails Fragment
@@ -119,10 +82,8 @@ class UpdateDoctorDetailsFragment : Fragment() {
         val dob = args.staffModel?.dob
         val doj = args.staffModel?.doj
         val place = args.staffModel?.place
-        val type = args.staffModel?.type
         val experience = args.staffModel?.experience
         val img = args.staffModel?.image
-        val noOfPatients = args.staffModel?.noOfPatients
 
         //    set data in editText of updateStaff fragment
         mBinding.edtName.setText(name)
@@ -131,9 +92,7 @@ class UpdateDoctorDetailsFragment : Fragment() {
         mBinding.edtDob.setText(dob)
         mBinding.edtDoj.setText(doj)
         mBinding.edtPlace.setText(place)
-        mBinding.ddDoctorType.setText(type)
         mBinding.edtExperience.setText(experience)
-        mBinding.edtNoOfPatients.setText(noOfPatients)
 
         if (!img.isNullOrEmpty()) {
             Glide.with(this).load(img).circleCrop().into(mBinding.imgUserImage)
@@ -143,7 +102,7 @@ class UpdateDoctorDetailsFragment : Fragment() {
 
         }
 
-        viewModel.updatingDoctorStaffLiveData.observe(viewLifecycleOwner) { staffModel ->
+        viewModel.updatingCareTakerStaffLiveData.observe(viewLifecycleOwner) { staffModel ->
             if (staffModel != null) {
                 Toast.makeText(context, "update successfully", Toast.LENGTH_SHORT).show()
 
@@ -156,11 +115,6 @@ class UpdateDoctorDetailsFragment : Fragment() {
             }
         }
 
-        mBinding.ddDoctorType.setOnDismissListener {
-            var adapter = ArrayAdapter(requireContext(), R.layout.item_dropdownmenu, doctorTypeList)
-
-            mBinding.ddDoctorType.setAdapter(adapter)
-        }
 
         mBinding.ivUpload.setOnClickListener {
             openGallary()
@@ -212,38 +166,6 @@ class UpdateDoctorDetailsFragment : Fragment() {
             datePickerDialog.show()
         }
 
-        mBinding.edtQualification.setOnClickListener {
-
-            Log.d("TAG", "onViewCreated: ")
-
-            val dialog = context.let { it1 -> Dialog(it1!!) }
-
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_education)
-            dialog.window?.setLayout(1450, 1100)
-
-            val edtQualification = dialog.findViewById<EditText>(R.id.edtQualification)
-            val edtUniversity = dialog.findViewById<EditText>(R.id.edtUniversity)
-            val add = dialog.findViewById<Button>(R.id.btnAdd)
-
-            add.setOnClickListener {
-
-                if (edtQualification.text.isNullOrEmpty()) {
-                    edtQualification.error = "Please enter Field"
-                } else if (edtUniversity.text.isNullOrEmpty()) {
-                    edtUniversity.error = "Please enter Field"
-                } else {
-                    var qualification =
-                        edtQualification.text.toString() + " - " + edtUniversity.text.toString()
-                    qualificationList.add(qualification)
-                    qualificationListAdapter.notifyDataSetChanged()
-                    mBinding.cvEdu.visibility = View.VISIBLE
-                    dialog.dismiss()
-                }
-
-            }
-            dialog.show()
-        }
 
     }
 
@@ -255,24 +177,14 @@ class UpdateDoctorDetailsFragment : Fragment() {
         val phoneNo = mBinding.edtMobileNo.text.toString()
         val dob = mBinding.edtDob.text.toString()
         val doj = mBinding.edtDoj.text.toString()
-        val type = mBinding.ddDoctorType.text.toString()
         val place = mBinding.edtPlace.text.toString()
         val experience = mBinding.edtExperience.text.toString()
-        val noOfPatients = mBinding.edtNoOfPatients.text.toString()
 
         if (image.isNullOrEmpty()) {
             image = args.staffModel?.image
         } else {
 
         }
-
-        val delQualification = qualificationList.toString()
-
-
-        val refQualification = delQualification.replace("[", "")
-        val qualification = refQualification.replace("]", "")
-
-        Log.d("TAG", "updateData: $qualification")
 
         val staffModel = StaffModel(
             args.staffModel?.staffId,
@@ -281,15 +193,15 @@ class UpdateDoctorDetailsFragment : Fragment() {
             phoneNo,
             dob,
             doj,
-            type,
-            qualification,
+            "",
+            "",
             experience,
             place,
-            noOfPatients,
+            "",
             image
         )
 
-        viewModel.updateDetails(staffModel)
+        viewModel.updateCareTakerDetails(staffModel)
     }
 
     private fun openGallary() {

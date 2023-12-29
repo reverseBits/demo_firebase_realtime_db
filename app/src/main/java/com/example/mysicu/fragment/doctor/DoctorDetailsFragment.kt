@@ -111,6 +111,15 @@ class DoctorDetailsFragment : Fragment() {
             }
         }
 
+        val noOfPatients = staffModel?.noOfPatients
+
+        if (noOfPatients.isNullOrEmpty()) {
+            mBinding.lnrPatients.visibility = View.GONE
+        } else {
+            mBinding.lnrPatients.visibility = View.VISIBLE
+            mBinding.tvRsPatients.text = noOfPatients
+
+        }
 
 //        Log.d("TAG", "setStaffDetailModel: $qualification")
 

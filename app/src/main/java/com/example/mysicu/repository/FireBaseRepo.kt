@@ -52,10 +52,10 @@ class FireBaseRepo {
 
      fun getStaffData(): LiveData<List<StaffModel>> {
         val staffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
-        val staffList: ArrayList<StaffModel> = ArrayList()
+
         mDatabase.child("Stafflist").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                val staffList: ArrayList<StaffModel> = ArrayList()
 
                 if (snapshot.exists()) {
 
@@ -77,11 +77,11 @@ class FireBaseRepo {
     }
      fun getDoctorStaffData(): LiveData<List<StaffModel>> {
         val doctorStaffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
-        val staffList: ArrayList<StaffModel> = ArrayList()
+
         mDatabase.child("DoctorList").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-
+                val staffList: ArrayList<StaffModel> = ArrayList()
                 if (snapshot.exists()) {
 
                     for (staffsnap in snapshot.children) {
@@ -101,5 +101,31 @@ class FireBaseRepo {
         return doctorStaffListingMutableLiveData
     }
 
+
+    fun getCareTakerData(): LiveData<List<StaffModel>> {
+        val careTakerListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
+
+        mDatabase.child("caretakerList").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val staffList: ArrayList<StaffModel> = ArrayList()
+
+                if (snapshot.exists()) {
+
+                    for (staffsnap in snapshot.children) {
+
+                        val staff = staffsnap.getValue(StaffModel::class.java)
+                        staffList.add(staff!!)
+                    }
+                }
+
+                careTakerListingMutableLiveData.postValue(staffList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "onCancelled: ${error.message}")
+            }
+        })
+        return careTakerListingMutableLiveData
+    }
 
 }
