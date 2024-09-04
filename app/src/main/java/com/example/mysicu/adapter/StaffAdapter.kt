@@ -60,13 +60,11 @@ class StaffAdapter(val staffList: List<StaffModel>, val screen: String) :
                     .placeholder(R.drawable.icon_nurse)
                     .into(holder.binding.ivEmp)
 
-                holder.binding.cvStaff.setOnClickListener {
+                holder.binding.root.setOnClickListener {
 
                     val action =
-                        NursingStaffListFragmentDirections.actionStaffListFragmentToStaffDetailsFragment(
-                            staffModel
-                        )
-                    Navigation.findNavController(holder.itemView).navigate(action)
+                        NursingStaffListFragmentDirections.actionStaffListFragmentToStaffDetailsFragment(staffModel)
+                    Navigation.findNavController(holder.binding.root).navigate(action)
                 }
 
                 holder.binding.cvStaff.setOnLongClickListener {

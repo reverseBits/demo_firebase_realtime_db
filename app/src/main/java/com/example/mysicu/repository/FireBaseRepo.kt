@@ -15,11 +15,7 @@ private const val TAG = "FireBaseRepo"
 
 class FireBaseRepo {
 
-    private var mDatabase: DatabaseReference
-
-    init {
-        mDatabase = FirebaseDatabase.getInstance().getReference()
-    }
+    private var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
 
 
     fun getHomeMenuData(): LiveData<List<HomeMenuData>> {
@@ -36,6 +32,7 @@ class FireBaseRepo {
                         val code: HomeMenuData = postSnapshot.getValue(HomeMenuData::class.java)!!
                         serviceList.add(code)
                     } catch (e: Exception) {
+                        Log.e(TAG, "onDataChange: $e")
                     }
                 }
                 homeMenuMutableLiveData.postValue(serviceList)
@@ -50,7 +47,7 @@ class FireBaseRepo {
     }
 
 
-     fun getStaffData(): LiveData<List<StaffModel>> {
+    fun getStaffData(): LiveData<List<StaffModel>> {
         val staffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
 
         mDatabase.child("Stafflist").addValueEventListener(object : ValueEventListener {
@@ -75,7 +72,8 @@ class FireBaseRepo {
         })
         return staffListingMutableLiveData
     }
-     fun getDoctorStaffData(): LiveData<List<StaffModel>> {
+
+    fun getDoctorStaffData(): LiveData<List<StaffModel>> {
         val doctorStaffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
 
         mDatabase.child("DoctorList").addValueEventListener(object : ValueEventListener {

@@ -46,7 +46,6 @@ class ProfileFragment : Fragment() {
         Navigation.findNavController(mBinding.root)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {

@@ -66,12 +66,6 @@ class DoctorDetailsFragment : Fragment() {
         mBinding.rvQualificationList.adapter = qualificationListAdapter
 
 
-        mainViewModel.staffDetailsMutableLiveData.observe(viewLifecycleOwner) {
-            it?.let {
-                setStaffDetailModel(it)
-            }
-        }
-
         setStaffDetailModel(args.staffmodel)
 
 
@@ -131,7 +125,7 @@ class DoctorDetailsFragment : Fragment() {
         mBinding.tvRsdoj.text = staffModel?.doj
         if (staffModel != null) {
             if (staffModel.type.isNullOrEmpty()) {
-                mBinding.tvType.text = "Nurse"
+                mBinding.tvType.text = "Dr"
             } else {
                 if (staffModel != null) {
                     mBinding.tvType.text = staffModel.type
