@@ -14,5 +14,6 @@ data class StaffModel(
     val qualification: String? = null,
     val experience: String? = null,
     val place: String? = null,
+    val noOfPatients: String? = null,
     val image: String? = null
 ) : Serializable

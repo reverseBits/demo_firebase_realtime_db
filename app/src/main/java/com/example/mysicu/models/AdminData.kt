@@ -9,6 +9,7 @@ data class AdminData(
     val experience: String? = null,
     val place: String? = null,
     val image: String? = null,
+    val access: String? = null,
 
 
 )

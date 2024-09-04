@@ -15,11 +15,7 @@ private const val TAG = "FireBaseRepo"
 
 class FireBaseRepo {
 
-    private var mDatabase: DatabaseReference
-
-    init {
-        mDatabase = FirebaseDatabase.getInstance().getReference()
-    }
+    private var mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
 
 
     fun getHomeMenuData(): LiveData<List<HomeMenuData>> {
@@ -36,6 +32,7 @@ class FireBaseRepo {
                         val code: HomeMenuData = postSnapshot.getValue(HomeMenuData::class.java)!!
                         serviceList.add(code)
                     } catch (e: Exception) {
+                        Log.e(TAG, "onDataChange: $e")
                     }
                 }
                 homeMenuMutableLiveData.postValue(serviceList)
@@ -50,12 +47,12 @@ class FireBaseRepo {
     }
 
 
-     fun getStaffData(): LiveData<List<StaffModel>> {
+    fun getStaffData(): LiveData<List<StaffModel>> {
         val staffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
-        val staffList: ArrayList<StaffModel> = ArrayList()
+
         mDatabase.child("Stafflist").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                val staffList: ArrayList<StaffModel> = ArrayList()
 
                 if (snapshot.exists()) {
 
@@ -75,13 +72,14 @@ class FireBaseRepo {
         })
         return staffListingMutableLiveData
     }
-     fun getDoctorStaffData(): LiveData<List<StaffModel>> {
+
+    fun getDoctorStaffData(): LiveData<List<StaffModel>> {
         val doctorStaffListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
-        val staffList: ArrayList<StaffModel> = ArrayList()
+
         mDatabase.child("DoctorList").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-
+                val staffList: ArrayList<StaffModel> = ArrayList()
                 if (snapshot.exists()) {
 
                     for (staffsnap in snapshot.children) {
@@ -101,5 +99,31 @@ class FireBaseRepo {
         return doctorStaffListingMutableLiveData
     }
 
+
+    fun getCareTakerData(): LiveData<List<StaffModel>> {
+        val careTakerListingMutableLiveData: MutableLiveData<List<StaffModel>> = MutableLiveData()
+
+        mDatabase.child("caretakerList").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val staffList: ArrayList<StaffModel> = ArrayList()
+
+                if (snapshot.exists()) {
+
+                    for (staffsnap in snapshot.children) {
+
+                        val staff = staffsnap.getValue(StaffModel::class.java)
+                        staffList.add(staff!!)
+                    }
+                }
+
+                careTakerListingMutableLiveData.postValue(staffList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "onCancelled: ${error.message}")
+            }
+        })
+        return careTakerListingMutableLiveData
+    }
 
 }

@@ -22,7 +22,7 @@ import com.example.mysicu.viewModels.StaffListingViewModel
 
 class DoctorListFragment : Fragment() {
 
-lateinit var mBinding: FragmentDoctorListBinding
+    lateinit var mBinding: FragmentDoctorListBinding
     private val viewModel: DoctorStaffListingViewModel by viewModels()
     private val navController: NavController by lazy {
         Navigation.findNavController(mBinding.root)
@@ -35,7 +35,8 @@ lateinit var mBinding: FragmentDoctorListBinding
     ): View? {
         // Inflate the layout for this fragment
 
-        mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_doctor_list, container, false)
+        mBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_doctor_list, container, false)
 
         return mBinding.root
     }
@@ -43,7 +44,7 @@ lateinit var mBinding: FragmentDoctorListBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        staffAdapter = StaffAdapter(doctorStaffList,"Doctor List")
+        staffAdapter = StaffAdapter(doctorStaffList, "Doctor List")
         mBinding.recyclerView.adapter = staffAdapter
         getData()
 
@@ -68,30 +69,27 @@ lateinit var mBinding: FragmentDoctorListBinding
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                return true
+//                staffAdapter.filter(newText.orEmpty())
+                return false
             }
         })
 
     }
+
     private fun getData() {
         mBinding.progressBar.visibility = View.VISIBLE
 
         viewModel.getDoctorStaffListLiveData().observe(
-            viewLifecycleOwner,
-            object : Observer<List<StaffModel>> {
-                override fun onChanged(value: List<StaffModel>) {
+            viewLifecycleOwner
+        ) { value ->
+            Log.d("TAG", "onChanged: $value")
 
-                    Log.d("TAG", "onChanged: $value")
+            doctorStaffList.clear()
+            doctorStaffList.addAll(value)
 
-                    doctorStaffList.clear()
-                    doctorStaffList.addAll(value)
-
-                    staffAdapter.notifyDataSetChanged()
-                    mBinding.progressBar.visibility = View.INVISIBLE
-
-                }
-            })
+            staffAdapter.notifyDataSetChanged()
+            mBinding.progressBar.visibility = View.INVISIBLE
+        }
     }
 
 }

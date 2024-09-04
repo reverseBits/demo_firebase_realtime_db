@@ -46,7 +46,6 @@ class ProfileFragment : Fragment() {
         Navigation.findNavController(mBinding.root)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -107,7 +106,6 @@ class ProfileFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("TAG", "error: ${error.message}")
                 Toast.makeText(requireContext(), "Failed ${error.message}", Toast.LENGTH_SHORT)
                     .show()
             }

@@ -1,4 +1,4 @@
-package com.example.mysicu.fragment.nurse
+package com.example.mysicu.fragment.Caretaker
 
 import android.os.Bundle
 import android.util.Log
@@ -6,51 +6,44 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView.OnQueryTextListener
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.mysicu.R
 import com.example.mysicu.adapter.StaffAdapter
-import com.example.mysicu.databinding.FragmentNursingStaffListBinding
+import com.example.mysicu.databinding.FragmentCareTakerListBinding
 import com.example.mysicu.models.StaffModel
-import com.example.mysicu.viewModels.StaffListingViewModel
+import com.example.mysicu.viewModels.CareTakerListingViewModel
 
+class CareTakerListFragment : Fragment() {
 
-class NursingStaffListFragment : Fragment() {
-
-    lateinit var mBinding: FragmentNursingStaffListBinding
-    private val viewModel: StaffListingViewModel by viewModels()
+    lateinit var mBinding: FragmentCareTakerListBinding
+    private val viewModel: CareTakerListingViewModel by viewModels()
     private val navController: NavController by lazy {
-        findNavController(mBinding.root)
+        Navigation.findNavController(mBinding.root)
     }
     lateinit var staffAdapter: StaffAdapter
     private val staffList: ArrayList<StaffModel> = ArrayList()
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_nursing_staff_list,
-            container,
-            false
-        )
+        // Inflate the layout for this fragment
+        mBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_care_taker_list, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        staffAdapter = StaffAdapter(staffList, "Nurse List")
+        staffAdapter = StaffAdapter(staffList, "CareTaker List")
         mBinding.recyclerView.adapter = staffAdapter
         getData()
 
-        mBinding.titleBar.tvToolbarTitle.text = "Nursing Staff"
+        mBinding.titleBar.tvToolbarTitle.text = "CareTaker Staff"
 
         mBinding.titleBar.ivBack.setOnClickListener {
             navController.navigateUp()
@@ -62,7 +55,7 @@ class NursingStaffListFragment : Fragment() {
         }
 
         mBinding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_staffListFragment_to_addStaffFragment)
+            findNavController().navigate(R.id.action_careTakerListFragment_to_addCartakerStaffFragment)
         }
 
         mBinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -80,7 +73,7 @@ class NursingStaffListFragment : Fragment() {
     private fun getData() {
         mBinding.progressBar.visibility = View.VISIBLE
 
-        viewModel.getStaffListLiveData().observe(
+        viewModel.getCareTakerListLiveData().observe(
             viewLifecycleOwner
         ) { value ->
             Log.d("TAG", "onChanged: $value")
@@ -92,7 +85,4 @@ class NursingStaffListFragment : Fragment() {
             mBinding.progressBar.visibility = View.INVISIBLE
         }
     }
-
-
 }
-

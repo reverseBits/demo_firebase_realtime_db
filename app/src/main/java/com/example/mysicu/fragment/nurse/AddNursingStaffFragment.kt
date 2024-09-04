@@ -229,7 +229,7 @@ class AddNursingStaffFragment : Fragment() {
                 qualification,
                 experience,
                 place,
-                ""
+                "",""
             )
 
             dbRef.child(staffId).setValue(staffModel).addOnCompleteListener {
